@@ -22,10 +22,10 @@ class SerialPort {
     private FileOutputStream mFileOutputStream;
 
     public SerialPort(File device, int baudRate, int flags) throws SecurityException, IOException {
-        //检查访问权限
+        //Check access permissions.
         if (!device.canRead() || !device.canWrite()) {
             try {
-                // 没有读/写权限，尝试对文件进行提权
+                // No read/write permissions, attempting to elevate privileges for the file.
                 Process su = Runtime.getRuntime().exec("/system/bin/su");
                 String cmd = "chmod 777 " + device.getAbsolutePath() + "\n" + "exit\n";
                 su.getOutputStream().write(cmd.getBytes());
@@ -38,7 +38,7 @@ class SerialPort {
                 throw new SecurityException();
             }
         }
-        //不要删除或重命名字段mFd:原生方法close()使用了该字段
+        //Do not delete or rename the field mFd: the native method close() uses this field.
         FileDescriptor mFd = open(device.getAbsolutePath(), baudRate, flags);
         if (mFd == null) {
             Log.i(TAG, "open method return null");
@@ -49,22 +49,22 @@ class SerialPort {
     }
 
     /**
-     * 打开串口
-     *
-     * @param path     设备路径
-     * @param baudRate 波特率
-     * @param flags    标记
-     * @return FileDescriptor
-     */
+    * Opens the serial port.
+    *
+    * @param path     Device path
+    * @param baudRate Baud rate
+    * @param flags    Flags
+    * @return FileDescriptor
+    */
     private native static FileDescriptor open(String path, int baudRate, int flags);
 
     /**
-     * 关闭串口
-     */
+    * Closes the serial port.
+    */
     public native void close();
 
     /**
-     * 获取输入输出流
+     * Get the input and output streams.
      */
     public InputStream getInputStream() {
         return mFileInputStream;
@@ -75,7 +75,7 @@ class SerialPort {
     }
 
     /**
-     * 关闭IO流
+     * Close the I/O stream.
      */
     public void closeIOStream() {
         try {
