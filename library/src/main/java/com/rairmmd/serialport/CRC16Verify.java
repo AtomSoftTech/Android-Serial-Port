@@ -4,7 +4,7 @@ package com.rairmmd.serialport;
  * @author Rair
  * @date 2017/9/24.
  * <p>
- * desc:CRC16校验
+ * desc: CRC16 checksum
  */
 public class CRC16Verify {
 
@@ -44,9 +44,9 @@ public class CRC16Verify {
     };
 
     /**
-     * 查表法计算 CRC-16
+     * Calculating CRC-16 using a lookup table.
      *
-     * @param data 代计算的字节
+     * @param data The bytes to be calculated.
      */
     private static int crcVal(byte[] data) {
         int Index;
@@ -62,9 +62,9 @@ public class CRC16Verify {
     }
 
     /**
-     * 计算crc16
+     * Calculate CRC16
      *
-     * @param data 代计算的字节
+     * @param data Bytes to be calculated
      * @return crc byte[]
      */
     public static byte[] calcCrcBytes(byte[] data) {
