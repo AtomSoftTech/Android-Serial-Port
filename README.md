@@ -1,32 +1,30 @@
 ## Android-Serial-Port
-安卓串口通讯，基于google官方编译，方便以后使用。
+Android serial communication, based on Google's official build, for convenient future use.
 
-## 说明library
+## Instructions for the library
 * libs
-各类cpu架构对应的so文件
+SO files corresponding to various CPU architectures
 
 * src/main/android_serialport_api
-一些控制类和打开关闭串口的操作
+Some control-related operations and operations for opening and closing serial ports.
 
 * ByteUtil
-工具类，字节转string
+Utility class, byte array to string conversion.
 
 * CRC16Verify
-crc16校验算法
+CRC16 checksum algorithm
 
 * BCCVerify
-bcc异或校验
+BCC XOR checksum
 
 * OnDataReceiverListener
-接受到回复后的回调监听
+Callback listener after receiving a response.
 
-## 使用
-1、将library作为依赖导入
-
-2、如果使用时报错缺少so，请将so文件复制到libs下，并配置
-```
+## Use
+1. Import the library as a dependency.
+2. If you encounter an error indicating a missing .so file during use, please copy the .so file to the libs folder and configure accordingly.```
 ndk {
-    //选择要添加的对应cpu类型的.so库。
+    // Select the corresponding .so library for the CPU type you want to add.
     abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'mips'
 }
 ```
@@ -37,35 +35,34 @@ sourceSets {
         jniLibs.srcDirs = ['libs']
 }
 ```
-3、在module 的build.gradle中添加
-
+3. Add this to the module's build.gradle file.
 ```
 dependencies {
     implementation(':library')
 }
 ```
 ### SerialPort
-串口操作类，对应jni方法。用于串口打开关闭，获取输入输出流，通过输入输出流发送报文和获取响应报文。
-
+This is a serial port operation class, corresponding to JNI methods.
+It is used for opening and closing serial ports, obtaining input and output streams, and sending and receiving messages through these streams.
 
 ### SerialPortManager
-控制类，打开关闭串口，发送接受报文
+Control class: for opening and closing the serial port, and sending and receiving messages.
 
-一般写成单例，在App中打开或关闭串口，不需要频繁的打开关闭
+It's usually implemented as a singleton, allowing you to open or close the serial port within the app without needing to open and close it frequently.
 ```
-public SerialPortManager(String devName, int baudRate) 构造方法(串口设备名，波特率)
+public SerialPortManager(String devName, int baudRate) Constructor method (serial port device name, baud rate)
 
-boolean openCOM()  打开串口
+boolean openCOM()  Open the serial port.
 
-void setOnDataReceiverListener(OnDataReceiverListener onDataReceiverListener) 设置监听，接收回复的报文及数据长度
+void setOnDataReceiverListener(OnDataReceiverListener onDataReceiverListener) Set up a listener to receive the response message and data length.
 
-void closeCOM() 关闭串口
+void closeCOM() Close the serial port.
 
-boolean sendCMD(byte[] data) 发送报文
+boolean sendCMD(byte[] data) Send message
 ```
-### SerialFinder 可不使用
-串口操作类
-枚举所有设备串口
+### SerialFinder Optional (can be omitted)
+Serial port operation class
+Enumerate all device serial ports.
 
 ## License
 Apache2.0
