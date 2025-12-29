@@ -4,15 +4,15 @@ package com.rairmmd.serialport;
  * @author Rair
  * @date 2018/1/5
  * <p>
- * desc:BCC校验
+ * desc: BCC checksum
  */
 public class BCCVerify {
 
     /**
-     * 计算BCC
-     *
-     * @param data 数据报文
-     */
+    * Calculates the BCC (Block Check Character)
+    *
+    * @param data The data message
+    */
     private static String bccVal(byte[] data) {
         String ret = "";
         byte[] BCC = new byte[1];
@@ -28,10 +28,10 @@ public class BCCVerify {
     }
 
     /**
-     * 计算BCC并转为byte数组
-     *
-     * @param data 数据报文
-     */
+    * Calculates the BCC and converts it to a byte array.
+    *
+    * @param data The data message
+    */
     public static byte[] calcBccBytes(byte[] data) {
         String bccVal = bccVal(data);
         return ByteUtil.hexStringToByteArray(bccVal);
