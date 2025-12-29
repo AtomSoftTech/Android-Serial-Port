@@ -19,7 +19,7 @@ public class SerialPortFinder {
             LineNumberReader r = new LineNumberReader(new FileReader("/proc/tty/drivers"));
             String line;
             while ((line = r.readLine()) != null) {
-                // 设备名称可能存在空格
+                // The device name may contain spaces.
                 String drivername = line.substring(0, 0x15).trim();
                 String[] w = line.split(" +");
                 if ((w.length >= 5) && ("serial".equals(w[w.length - 1]))) {
@@ -33,7 +33,7 @@ public class SerialPortFinder {
 
     public String[] getAllDevices() {
         Vector<String> devices = new Vector<>();
-        // 解析每个设备
+        // Analyze each device.
         Iterator<Driver> itdriv;
         try {
             itdriv = getDrivers().iterator();
