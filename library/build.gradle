@@ -8,7 +8,7 @@ android {
         targetSdkVersion 30
 
         ndk {
-            //选择要添加的对应cpu类型的.so库。
+            // Select the corresponding .so library for the CPU type you want to add.
             abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'mips'
         }
     }
