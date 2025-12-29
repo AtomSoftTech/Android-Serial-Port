@@ -27,13 +27,13 @@ public class SerialPortManager {
     private OnDataReceiverListener onDataReceiverListener;
 
     /**
-     * 机器控制
-     *
-     * @param devName  串口设备名
-     * @param baudRate 波特率
-     *                 <p>
-     *                 例如 devName = "/dev/ttyS3"，baudRate =9600。
-     */
+    * Machine control
+    *
+    * @param devName  Serial port device name
+    * @param baudRate Baud rate
+    *
+    * For example, devName = "/dev/ttyS3", baudRate = 9600.
+    */
     public SerialPortManager(String devName, int baudRate) {
         mSerialPortFinder = new SerialPortFinder();
         mDeviceName = devName;
@@ -63,30 +63,30 @@ public class SerialPortManager {
 //    }
 
     /**
-     * 枚举所有串口的设备名。
-     *
-     * @return 串口的设备名数组
-     */
+    * Enumerates the device names of all serial ports. 
+    *
+    * @return An array of serial port device names.
+    */
     private String[] getCOMList() {
         return mSerialPortFinder.getAllDevicesPath();
     }
 
     /**
-     * 打开串口
-     *
-     * @return 是否成功
-     */
+    * Opens the serial port.
+    *
+    * @return Whether the operation was successful.
+    */
     public boolean openCOM() {
         String[] comList = getCOMList();
         for (String comname : comList) {
-            Log.i(TAG, "所有串口设备名：" + comname);
+            Log.i(TAG, "All serial port device names：" + comname);
         }
         if (mSerialPort == null) {
             try {
                 mSerialPort = new SerialPort(new File(mDeviceName), mBaudRate, 0);
                 mOutputStream = mSerialPort.getOutputStream();
                 mInputStream = mSerialPort.getInputStream();
-                // 开启读取串口数据线程
+                // Start the thread for reading serial port data.
                 mReadCOMThread = new ReadCOMThread();
                 mReadCOMThread.start();
                 return true;
@@ -99,7 +99,7 @@ public class SerialPortManager {
     }
 
     /**
-     * 关闭串口
+     * Close the serial port.
      */
     public void closeCOM() {
         if (mSerialPort != null) {
@@ -111,11 +111,11 @@ public class SerialPortManager {
     }
 
     /**
-     * 发送报文
-     *
-     * @param data 报文
-     * @return 是否成功
-     */
+    * Sends a message.
+    *
+    * @param data The message to send.
+    * @return Whether the operation was successful.
+    */
     public boolean sendCMD(byte[] data) {
         try {
             if (mOutputStream != null) {
@@ -132,7 +132,7 @@ public class SerialPortManager {
     }
 
     /**
-     * 读取串口数据
+     * Read serial port data
      */
     private class ReadCOMThread extends Thread {
 
@@ -160,7 +160,7 @@ public class SerialPortManager {
     }
 
     /**
-     * 设置回调监听
+     * Set up a callback listener.
      *
      * @param onDataReceiverListener onDataReceiverListener
      */
