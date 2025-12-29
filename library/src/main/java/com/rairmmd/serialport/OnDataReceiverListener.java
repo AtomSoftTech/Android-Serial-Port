@@ -4,16 +4,16 @@ package com.rairmmd.serialport;
  * @author Rair
  * @date 2017/10/25
  * <p>
- * desc:数据接收回调
+ * desc: Data reception callback
  */
 
 public interface OnDataReceiverListener {
 
     /**
-     * 接收数据
+     * Receiving data
      *
-     * @param buffer 收到的字节数组
-     * @param size   长度
+     * @param buffer The received byte array
+     * @param size The length
      */
     void onDataReceiver(byte[] buffer, int size);
 }
