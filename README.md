@@ -22,7 +22,9 @@ Callback listener after receiving a response.
 
 ## Use
 1. Import the library as a dependency.
-2. If you encounter an error indicating a missing .so file during use, please copy the .so file to the libs folder and configure accordingly.```
+2. If you encounter an error indicating a missing .so file during use, please copy the .so file to the libs folder and configure accordingly.
+  
+```
 ndk {
     // Select the corresponding .so library for the CPU type you want to add.
     abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'mips'
