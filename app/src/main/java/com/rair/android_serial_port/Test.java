@@ -27,7 +27,7 @@ public class Test {
             });
             machineControl.sendCMD(new byte[0x00]);
         } else {
-            Log.i("Rair", "打开串口失败");
+            Log.i("Rair", "Failed to open the serial port.");
         }
     }
 }
